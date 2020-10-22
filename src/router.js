@@ -12,7 +12,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: '/', redirect: '/coaches' },
-        { path: '/coaches', component: CoachesList },
+        { path: '/coaches/', component: CoachesList },
         { 
             path: '/coaches/:id', 
             component: CoachDetail, 
@@ -25,3 +25,5 @@ const router = createRouter({
         { path: '/:notFound(.*)', component: NotFound },
     ]
 })
+
+export default router
