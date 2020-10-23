@@ -15,6 +15,6 @@ app.use(store)
 
 app.component('base-card', BaseCard);
 app.component('base-badge', BaseBadge);
-app.component('base-Button', BaseButton);
+app.component('base-button', BaseButton);
 
 app.mount('#app');
