@@ -168,6 +168,7 @@ textarea:focus {
 
 input[type='checkbox'] {
   display: inline;
+  width: auto;
   border: none;
 }
 
