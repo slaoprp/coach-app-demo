@@ -28,7 +28,7 @@
                     id="frontend"
                     value="frontend"
                     v-model="areas.val"
-                    @blur="clearValidity('area')"
+                    @blur="clearValidity('areas')"
                 />
                 <label for="frontend">Frontend Development</label>
             </div>
@@ -38,7 +38,7 @@
                     id="backend"
                     value="backend"
                     v-model="areas.val"
-                    @blur="clearValidity('area')"
+                    @blur="clearValidity('areas')"
                 />
                 <label for="backend">Backend Development</label>
             </div>
@@ -48,7 +48,7 @@
                     id="career"
                     value="career"
                     v-model="areas.val"
-                    @blur="clearValidity('area')"
+                    @blur="clearValidity('areas')"
                 />
                 <label for="career">Career Advisory</label>
             </div>
@@ -61,7 +61,7 @@
 
 <script>
 export default {
-    emits: ['save-date'],
+    emits: ['save-data'],
     data() {
         return {
             firstName: {
@@ -89,7 +89,7 @@ export default {
     },
     methods: {
         clearValidity(input) {
-            this[input].isValid = true
+            this[input].isValid = true;
         },
         validateForm() {
             this.formIsValid = true;
@@ -168,7 +168,6 @@ textarea:focus {
 
 input[type='checkbox'] {
   display: inline;
-  width: auto;
   border: none;
 }
 
