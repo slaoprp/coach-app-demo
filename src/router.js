@@ -19,7 +19,7 @@ const CoachesList = defineAsyncComponent(() =>
 );
 
 const CoachRegistration = defineAsyncComponent(() => 
-  import('./pages/coaches/CoachesRegistration.vue')
+  import('./pages/coaches/CoachRegistration.vue')
 );
 
 const ContactCoach = defineAsyncComponent(() => 
