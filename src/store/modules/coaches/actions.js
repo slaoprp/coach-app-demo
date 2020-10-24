@@ -1,59 +1,64 @@
 export default {
-    async registerCoach(context, data) {
-        const userId = context.rootGetters.userId;
-        const coachData = {
-            id: context.rootGetters.userId,
-            firstName: data.first,
-            lastName: data.last,
-            description: data.desc,
-            hourlyRate: data.rate,
-            areas: data.areas
-        };
+async registerCoach(context, data) {
+    const userId = context.rootGetters.userId;
+    const coachData = {
+      id: context.rootGetters.userId,
+      firstName: data.first,
+      lastName: data.last,
+      description: data.desc,
+      hourlyRate: data.rate,
+      areas: data.areas
+    };
 
-        const response = await fetch(`https://mrcoach-16fbc.firebaseio.com/coaches/${userId}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(coachData)
-        });
+    const token = context.rootGetters.token;
 
-        // const reponseData = await response.json();
+    const response = await fetch(
+      `https://mrcoach-16fbc.firebaseio.com/coaches/${userId}.json?auth=` + 
+        token, 
+    {
+      method: 'PUT',
+      body: JSON.stringify(coachData)
+    });
 
-        if (!response.ok) {
-            // error ...
-        }
+    // const reponseData = await response.json();
 
-        context.commit('registerCoach', {
-            ...coachData,
-            id: userId
-        })
-    },
-    async loadCoaches(context, payload) {
-        if ( !payload.forceRefresh && !context.getters.shouldUpdate) {
-            return;
-        }
-        const response = await fetch(
-            `https://mrcoach-16fbc.firebaseio.com/coaches.json`
-        );
-        const responseData = await response.json();
-
-        if (!response.ok) {
-            const error = new Error(responseData.message || 'Failed to fetch!');
-            throw error;
-        }
-
-        const coaches = [];
-
-        for (const key in responseData) {
-            const coach = {
-                id: responseData[key].id,
-                firstName: responseData[key].firstName,
-                lastName: responseData[key].lastName,
-                description: responseData[key].description,
-                hourlyRate: responseData[key].hourlyRate,
-                areas: responseData[key].areas         
-            };
-            coaches.push(coach);
-        }
-        context.commit('setCoaches', coaches);
-        context.commit('setFetchTimestamp');
+    if (!response.ok) {
+      // error ...
     }
+
+    context.commit('registerCoach', {
+      ...coachData,
+      id: userId
+    })
+  },
+  async loadCoaches(context, payload) {
+    if ( !payload.forceRefresh && !context.getters.shouldUpdate) {
+        return;
+    }
+    const response = await fetch(
+        `https://mrcoach-16fbc.firebaseio.com/coaches.json`
+    );
+    const responseData = await response.json();
+
+    if (!response.ok) {
+        const error = new Error(responseData.message || 'Failed to fetch!');
+        throw error;
+    }
+
+    const coaches = [];
+
+    for (const key in responseData) {
+        const coach = {
+            id: responseData[key].id,
+            firstName: responseData[key].firstName,
+            lastName: responseData[key].lastName,
+            description: responseData[key].description,
+            hourlyRate: responseData[key].hourlyRate,
+            areas: responseData[key].areas         
+        };
+        coaches.push(coach);
+    }
+    context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp');
+  }
 };
