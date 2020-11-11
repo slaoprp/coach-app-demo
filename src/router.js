@@ -38,10 +38,6 @@ const BoxSizing1 = defineAsyncComponent(() =>
   import('./pages/boards/BoxSizing1.vue')
 );
 
-const BoxSizing2 = defineAsyncComponent(() => 
-  import('./pages/boards/BoxSizing2.vue')
-);
-
 const UserAuth = defineAsyncComponent(() => 
   import('./pages/auth/UserAuth.vue')
 );
@@ -64,7 +60,6 @@ const router = createRouter({
     { path: '/auth', component: UserAuth, meta: { requiresUnAuth: true} },
     { path: '/board1', component: EpisodeBoard },
     { path: '/board2', component: BoxSizing1 },
-    { path: '/board3', component: BoxSizing2 },
     { path: '/:notFound(.*)', component: NotFound },
   ]
 });

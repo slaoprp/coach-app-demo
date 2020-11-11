@@ -1,20 +1,12 @@
 <template>
-  <div class="container">
-    <div class="group-wrapper">
-      <div class="group-card">
-        <div class="episode-wrapper">
-          <div class="episode-card">
-            <div class="episode-header">Episode 1</div>
-            <div class="episode-content">
-              <span class="taskline">Task 1</span>
-              <span class="taskline">Task 2</span>
-              <span class="taskline">Task 3</span>
-              <span class="taskline">Task 4</span>
-            </div>
-            <div class="episode-footer">1</div>
-          </div>
-        </div>
-      </div>
+  <div class='scroll'>
+    <div class='flex'>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
     </div>
   </div>
 </template>
@@ -26,102 +18,24 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  width: 100vw;
-  height: calc(100vh - 80px);
-  border: 1px;
-}
-.group-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  min-width: 100%;
-  height: auto;
-  padding: 10px;
-  float: left;
-}
-.group-card {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  border: 1px #ccc solid;
-  border-radius: 10px;
-  text-align: center;
-  width: auto;
-  height: auto;
-  margin: 5px;
-}
+*{margin: 0; padding: 0; box-sizing: border-box;}
 
-.episode-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  min-width: 300px;
+.scroll{
+  overflow: auto;
+  width: 100%;
   height: 100%;
+  background-color: lightblue;
+}
+
+.flex{
+  display: flex;
   padding: 10px;
-  float: left;
+  width: fit-content;
 }
 
-.episode-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  min-width: 300px;
-  height: auto;
-  margin: 5px;
-  background-color: darkcyan;
-}
-
-.episode-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 50px;
-  background-color: green;
-  border-radius: 10px 10px 0px 0px;
-  color: white;
-}
-
-.episode-content {
-  overflow-y: scroll;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  background-color: black;
-  padding: 0px 10px 10px 10px;
-}
-
-.episode-footer {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 50px;
-  background-color: green;
-  border-radius: 0px 0px 10px 10px;
-  color: white;
-}
-
-.taskline {
-  margin-top: 10px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50px;
-  padding: 5px;
-  background-color: white;
-  border-radius: 10px;
-  width: 100%;
+.item{
+  width: 250px;
+  height: 300px;
+  background-color: tomato;
 }
 </style>

@@ -1,15 +1,24 @@
 <template>
   <div class="container">
-    <div class="group">
-      <div class="episode-card" v-for="episode in episodes" :key="episode.id">
-        <div class="episode-header">{{ episode.title }}</div>
-        <div class="episode-content">
-          <span class="taskline"
-            v-for="task in tasks"
-            :key="task.id"
-          >{{ task.name }}</span>
+    <div class="group-wrapper">
+      <div class="group-card">
+        <div class="episode-wrapper"
+          v-for="episode in episodes"
+          :key="episode.id"
+        >
+          <div class="episode-card">
+            <div class="episode-header">{{ episode.title }}</div>
+            <div class="episode-content">
+              <span class="taskline"
+                v-for="task in tasks"
+                :key="task.id"
+              >
+                {{ task.name }}
+              </span>
+            </div>
+            <div class="episode-footer">{{ episode.position }}</div>
+          </div>
         </div>
-        <div class="episode-footer">{{ episode.position }}</div>
       </div>
     </div>
   </div>
@@ -21,75 +30,101 @@ export default {
     return {
       episodes: [
         {
+          groupId: 1,
           id: 1,
-          title: "List 1",
+          title: "Day One",
           position: 1
         },
         {
-          id: 2,
-          title: "List 2",
+          groupId: 2,
+          id: 1,
+          title: "Day Two",
           position: 2
         },
         {
-          id: 3,
-          title: "List 3",
+          groupId: 3,
+          id: 1,
+          title: "Day Three",
           position: 3
-        },
-        {
-          id: 4,
-          title: "List 4",
-          position: 4
-        },
-        {
-          id: 5,
-          title: "List 5",
-          position: 5
-        },
-        {
-          id: 6,
-          title: "List 6",
-          position: 6
         }
       ],
       tasks: [
         {
+          episodeId: 1,
           id: 1,
-          name: "Push Up"
+          name: 'Push Up',
         },
         {
+          episodeId: 1,
           id: 2,
-          name: "Squats"
+          name: 'Jumping Jack',
         },
         {
+          episodeId: 1,
           id: 3,
-          name: "Jumping Jack"
+          name: 'Jump Squats',
         }
       ]
     }
+  },
+  computed: {
+    tasksFilterByEpisodeId() {
+      this.episodes.map((episode) => {
+        const tasks = this.tasks.filter((task) => {
+          if (task.episodeId === episode.id) {
+            return true
+          };
+        });
+        return ({
+          episodeId: episode.id,
+          tasks: tasks
+        })
+      })
+    }
   }
+  
 }
 </script>
 
 <style scoped>
 .container {
-  display: flex; 
-  height: calc(100vh - 80px); 
-  width: 100vw;
+  display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  border: 1px rgba(255, 255, 255, 0.000);
+  width: 100vw;
+  height: calc(100vh - 80px);
+  border: 1px;
+}
+.group-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  min-width: 100%;
+  height: auto;
+  padding: 3px;
+  float: left;
+}
+.group-card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  /* border: 1px #ccc solid; */
+  border-radius: 10px;
+  text-align: center;
+  width: auto;
+  height: auto;
+  margin: 3px;
 }
 
-.group {
+.episode-wrapper {
   position: relative;
-  display: flex; 
+  display: flex;
   flex-direction: row;
-  background-color: blue;
-  width: fit-content;
-  height: auto;
   box-sizing: border-box;
-  padding: 10px;
-  border-radius: 10px;
+  min-width: 300px;
+  height: 100%;
+  padding: 3px;
   float: left;
 }
 
@@ -97,11 +132,10 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: auto;
+  flex: 1 1 auto;
   min-width: 300px;
-  margin: 10px;
-  background-color: cornflowerblue;
-  border-radius: 10px;
+  height: auto;
+  margin: 3px;
 }
 
 .episode-header {
@@ -110,19 +144,19 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 50px;
+  min-height: 40px;
   background-color: green;
   border-radius: 10px 10px 0px 0px;
   color: white;
 }
 
 .episode-content {
+  overflow-y: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
   height: auto;
   background-color: black;
-  overflow: scroll;
   padding: 0px 10px 10px 10px;
 }
 
@@ -132,7 +166,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 50px;
+  min-height: 40px;
   background-color: green;
   border-radius: 0px 0px 10px 10px;
   color: white;
@@ -144,7 +178,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50px;
+  min-height: 40px;
   padding: 5px;
   background-color: white;
   border-radius: 10px;
